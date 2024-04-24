@@ -1,0 +1,88 @@
+html {
+    background-color: white;
+
+    font-family: 'Trebuchet MS' !important;
+
+    column-rule-color: #10a134 !important;
+    -webkit-column-rule-color: #10a134 !important;
+    -moz-column-rule-color: #10a134 !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+body {
+    margin-bottom: -5% !important;
+}
+
+.nav-wrapper {
+    background-color: #10a134;
+    padding-left: .5%;
+}
+
+.brand-logo {
+    font-family: 'Trebuchet MS' !important;
+
+}
+
+.container {
+    /*color: #10a134;*/
+    /*-webkit-text-fill-color: #10a134;*/
+    align-items: center;
+}
+
+div {
+    color: #10a134;
+}
+
+
+.row {
+    padding: 3%;
+}
+
+.waves-effect {
+    background-color: #10a134;
+}
+
+.waves-effect:hover {
+    background-color: #1eaa41;
+}
+
+.nav-fixed {
+    color: #10a134;
+}
+
+.sidenav li {
+    color: #10a134;
+}
+
+body {
+    color: #10a134;
+}
+
+.footer {
+    background: #10a134 !important;
+    color: white !important;
+}
+
+.nav-content {
+    background-color: #10a134 !important;
+}
+
+/* Default font size */
+.home-text {
+    font-size: 16px;
+}
+
+/* Larger font size for desktop screens */
+@media (min-width: 768px) {
+    .home-text {
+        font-size: 22px;
+    }
+}
+
+/* Smaller font size for mobile screens */
+@media (max-width: 767px) {
+    .home-text {
+        font-size: 14px;
+    }
+}
+
