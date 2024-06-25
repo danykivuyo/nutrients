@@ -7,7 +7,7 @@ function download()
 }
 ?>
 
-<body>
+<body class="purple darken-3">
     <br />
     <br />
     <br />
@@ -41,7 +41,7 @@ function download()
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <body>
+    <body class="purple darken-3">
         <div class="row">
             <br />
             <!-- <div class="container s6 m12">

@@ -1,9 +1,10 @@
 <html>
-    <body>
-        <?php require_once 'helpers/navbar.php'?>
 
-        <?php 
-        echo '
+<body class="purple darken-3">
+    <?php require_once 'helpers/navbar.php' ?>
+
+    <?php
+    echo '
         <br /><br /><br /><br /><br /><br />
         <div id="before" class="section scrollspy">
             <div class="container row z-depth-5 hoverable">
@@ -47,32 +48,33 @@
         </div>
         <br /><br /><br /><br /><br /><br />
         ';
-        
-        if(isset($_POST['user_login_submit'])){
-            $homeController = new Home;
-            $user_email = $_POST['user_name_or_email'];
-            $homeController->userModel->user_reset_set($user_email);
-            $homeController->userModel->userReset();
-        }
 
-        if(isset($_POST['submit'])){
-            $homeController = new Home;
-            $verification_code = $_POST['verification_code'];
-            $homeController->userModel->user_verification_set($verification_code);
-            $homeController->userModel->userVerify();
-            unset($_POST['submit']);
-        }
+    if (isset($_POST['user_login_submit'])) {
+        $homeController = new Home;
+        $user_email = $_POST['user_name_or_email'];
+        $homeController->userModel->user_reset_set($user_email);
+        $homeController->userModel->userReset();
+    }
 
-        if(isset($_POST['comfirm'])){
-            $homeController = new Home;
-            $new_password = $_POST['new_password'];
-            $user_id = $_POST["id"];
-            $homeController->userModel->passwordChange($user_id , $new_password);
-            unset($_POST['submit']);
-        }
-        
-        ?>
+    if (isset($_POST['submit'])) {
+        $homeController = new Home;
+        $verification_code = $_POST['verification_code'];
+        $homeController->userModel->user_verification_set($verification_code);
+        $homeController->userModel->userVerify();
+        unset($_POST['submit']);
+    }
 
-        <?php require_once 'helpers/footer.php'?>
-    </body>
+    if (isset($_POST['comfirm'])) {
+        $homeController = new Home;
+        $new_password = $_POST['new_password'];
+        $user_id = $_POST["id"];
+        $homeController->userModel->passwordChange($user_id, $new_password);
+        unset($_POST['submit']);
+    }
+
+    ?>
+
+    <?php require_once 'helpers/footer.php' ?>
+</body>
+
 </html>

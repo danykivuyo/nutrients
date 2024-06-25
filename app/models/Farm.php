@@ -35,24 +35,16 @@ class Farm
             `ind` INT(255) NOT NULL AUTO_INCREMENT , 
             `farm_id` VARCHAR(50) NULL DEFAULT NULL , 
             `plant_id` VARCHAR(50) NULL DEFAULT NULL , 
-            `carbon_dioxide` VARCHAR(20) NULL DEFAULT NULL , 
-            `methane` VARCHAR(20) NULL DEFAULT NULL , 
-            `temperature` VARCHAR(20) NULL DEFAULT NULL , 
-            `humidity` VARCHAR(20) NULL DEFAULT NULL , 
-            `ammonia` VARCHAR(20) NULL DEFAULT NULL , 
-            `nitrogen_oxide` VARCHAR(20) NULL DEFAULT NULL , 
-            `carbon_monoxide` VARCHAR(20) NULL DEFAULT NULL , 
+            `nitrohen` VARCHAR(20) NULL DEFAULT NULL , 
+            `phosphorus` VARCHAR(20) NULL DEFAULT NULL , 
+            `pottasium` VARCHAR(20) NULL DEFAULT NULL , 
+            `soil_ph` VARCHAR(20) NULL DEFAULT NULL , 
+            `soil_temperature` VARCHAR(20) NULL DEFAULT NULL , 
+            `soil_humidity` VARCHAR(20) NULL DEFAULT NULL , 
+            `electrical_conductivity` VARCHAR(20) NULL DEFAULT NULL , 
+            `salinity` VARCHAR(20) NULL DEFAULT NULL , 
             `time_stamp` VARCHAR(20) NULL DEFAULT NULL ,
             PRIMARY KEY (`ind`))';
-
-        // $mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
-        // if ( $mysqli->query($sql) === TRUE) {
-        //     echo "Table users created successfully";
-        // } else {
-        //     echo "Error creating table: " .  $mysqli->error;
-        // }
-        // $mysqli->close();
-
         $this->db->query($sql);
         $this->db->execute();
     }

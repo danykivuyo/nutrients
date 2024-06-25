@@ -7,7 +7,7 @@ function download()
 }
 ?>
 
-<body>
+<body class="purple darken-3">
     <br />
     <br />
     <br />
@@ -39,7 +39,7 @@ function download()
         }
     </script>
 
-    <body>
+    <body class="purple darken-3">
         <div class="row">
             <br />
             <div class="container s12 m12">

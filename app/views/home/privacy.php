@@ -1,7 +1,8 @@
-<body>
-    <?php require_once 'helpers/navbar.php'?>
+<body class="purple darken-3">
+    <?php require_once 'helpers/navbar.php' ?>
     privacy page
     <br /><br /><br /><br /><br /><br /><br />
-    <?php require_once 'helpers/footer.php'?>
+    <?php require_once 'helpers/footer.php' ?>
 </body>
+
 </html>
