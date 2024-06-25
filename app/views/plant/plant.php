@@ -42,8 +42,8 @@ require_once "helpers/navbar.php";
                                     echo "<td>" . trim($plant["plant_farm_name"]) . "</td>";
                                     echo "<td>" . trim($plant["plant_id"]) . "</td>";
                                     // echo "<td>" . trim($plant["plant_created_at"]) . "</td>";
-                                    // echo "<td><a style='text-decoration:none' href='" . URLROOT . "home/plant/" . $_SESSION['user_id'] . "/data/" . $plant['plant_id'] . "'><button class='btn waves-effect waves-light purple'>MORE</button></a></td>";
-                                    echo '<td><a style="text-decoration:none" href="#"><button class="btn waves-effect waves-light purple">MORE</button></a></td>';
+                                    echo "<td><a style='text-decoration:none' href='" . URLROOT . "home/plant/" . $_SESSION['user_id'] . "/data/" . $plant['plant_id'] . "'><button class='btn waves-effect waves-light purple'>MORE</button></a></td>";
+                                    // echo '<td><a style="text-decoration:none" href="#"><button class="btn waves-effect waves-light purple">MORE</button></a></td>';
                                     echo "</tr>";
                                 }
                                 ?>

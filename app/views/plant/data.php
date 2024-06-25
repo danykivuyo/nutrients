@@ -41,104 +41,91 @@ function download()
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <body class="purple darken-3">
-        <div class="row">
-            <br />
-            <!-- <div class="container s6 m12">
-                <div class="container row z-depth-5 hoverable">
-                    <form class="form">
-                        <label for="ppmtime">Choose Graph</label>
-                        <select id="ppmtime" name="ppmtime">
-                            <option value="ppmtime" selected>ppm VS time</option>
-                            <option value="ppmtemperature">ppm VS temp </option>
-                        </select>
-                    </form>
-                </div>
-            </div> -->
-            <div class="container">
+    < class="purple darken-3">
+        <div class="container">
+            <div class="section scrollspy">
+                <br><br><br>
                 <div class="row">
-                    <div class="input-field col s12">
-                        <select id="mySelect" onchange="handleSelectChange()">
-                            <option value="ppmtime" selected>ppm VS time</option>
-                            <option value="ppmtemperature">ppm VS temp </option>
-                        </select>
-                        <label for="mySelect">Choose Graph</label>
+                    <div class="container s12 m12">
+                        <div class="card-panel purple white z-depth-5">
+                            <table class="stripped">
+                                <thead>
+                                    <th>
+                                        Date
+                                    </th>
+                                    <th>
+                                        Time
+                                    </th>
+                                    <th>
+                                        N
+                                    </th>
+                                    <th>
+                                        P
+                                    </th>
+                                    <th>
+                                        K
+                                    </th>
+                                    <th>
+                                        %H
+                                    </th>
+                                    <th>
+                                        C <sup>o</sup>
+                                    </th>
+                                    <th>PH</th>
+                                    <th>e</th>
+                                    <th>Sal</th>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $i = 0;
+                                    foreach ($plant_data as $plant) {
+                                        $i++;
+                                        if ($i == 30) {
+                                            break;
+                                        }
+                                        // if (preg_match('/(\d{2}:\d{2}) (\d{2} [A-Za-z]+)/', $string, $matches)) echo "Time: {$matches[1]}<br>Date: {$matches[2]}<br>";
+                                        echo "<tr>";
+                                        if (preg_match('/(\d{2}:\d{2}) (\d{2} [A-Za-z]+)/', trim($plant["time_stamp"]), $matches)) {
+                                            if ($i == 1) {
+                                                $m = trim($matches[2]);
+                                                echo "<td style='max-width:10px'> {$m}</td>";
+                                            } else {
+                                                echo "<td></td>";
+                                            }
+                                            echo " <td>{$matches[1]} </td> ";
+                                        }
+                                        // echo "" . trim($plant["time_stamp"]) . "</td>";
+                                        echo "<td>" . trim(number_format($plant["carbon_monoxide"], 2)) . "</td>";
+                                        echo "<td>" . trim(number_format($plant["methane"], 2)) . "</td>";
+                                        echo "<td>" . trim($plant["temperature"]) . "</td>";
+                                        echo "<td>" . trim($plant["humidity"]) . "</td>";
+                                        // echo "<td>" . trim($plant["ammonia"]) . "</td>";
+                                        echo "<td>" . trim(number_format($plant["nitrogen_oxide"], 4)) . "</td>";
+                                        // echo "<td><a style='text-decoration:none' href='" . URLROOT . "home/plant/" . $_SESSION['user_id'] . "/data/" . $plant['plant_id'] . "'><button class='btn waves-effect waves-light green'>ZAIDI</button></a></td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+                        <div class="row">
+                            <div class="center container s12 m12">
+                                <a
+                                    href='<?php echo URLROOT . "home/plant/" . $_SESSION["user_id"] . '/' . 'download/' . $plant_data[0]["plant_id"]; ?>'>
+                                    <!-- <a href="#"> -->
+                                    <!-- <button onclick="handleClick()" disabled class="btn waves-effect waves-light green"> -->
+                                    <button class="btn waves-effect waves-light green"> Export CSV <i
+                                            class="material-icons right">cloud_download</i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="container s6 m12">
-                <div style="max-width: 40% !important, align:center" align="center">
-                    <canvas id="lineChart" width="100" height="50" style="width:60%"></canvas>
-                </div>
-            </div>
-            <div class="container s12 m12">
-                <table class="stripped">
-                    <thead>
-                        <th>
-                            Date
-                        </th>
-                        <th>
-                            Time
-                        </th>
-                        <th>
-                            CO<sub>2</sub>
-                        </th>
-                        <th>
-                            CH<sub>4</sub>
-                        </th>
-                        <th>
-                            <sup>o</sup>C
-                        </th>
-                        <th>
-                            %H
-                        </th>
-                        <th>
-                            N<sub>2</sub>O
-                        </th>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $i = 0;
-                        foreach ($plant_data as $plant) {
-                            $i++;
-                            if ($i == 30) {
-                                break;
-                            }
-                            // if (preg_match('/(\d{2}:\d{2}) (\d{2} [A-Za-z]+)/', $string, $matches)) echo "Time: {$matches[1]}<br>Date: {$matches[2]}<br>";
-                            echo "<tr>";
-                            if (preg_match('/(\d{2}:\d{2}) (\d{2} [A-Za-z]+)/', trim($plant["time_stamp"]), $matches)) {
-                                if ($i == 1) {
-                                    $m = trim($matches[2]);
-                                    echo "<td style='max-width:10px'> {$m}</td>";
-                                } else {
-                                    echo "<td></td>";
-                                }
-                                echo " <td>{$matches[1]} </td> ";
-                            }
-                            // echo "" . trim($plant["time_stamp"]) . "</td>";
-                            echo "<td>" . trim(number_format($plant["carbon_monoxide"], 2)) . "</td>";
-                            echo "<td>" . trim(number_format($plant["methane"], 2)) . "</td>";
-                            echo "<td>" . trim($plant["temperature"]) . "</td>";
-                            echo "<td>" . trim($plant["humidity"]) . "</td>";
-                            // echo "<td>" . trim($plant["ammonia"]) . "</td>";
-                            echo "<td>" . trim(number_format($plant["nitrogen_oxide"], 4)) . "</td>";
-                            // echo "<td><a style='text-decoration:none' href='" . URLROOT . "home/plant/" . $_SESSION['user_id'] . "/data/" . $plant['plant_id'] . "'><button class='btn waves-effect waves-light green'>ZAIDI</button></a></td>";
-                            echo "</tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="row">
-                <div class="center container s12 m12">
-                    <a
-                        href='<?php echo URLROOT . "home/plant/" . $_SESSION["user_id"] . '/' . 'download/' . $plant_data[0]["plant_id"]; ?>'>
-                        <!-- <a href="#"> -->
-                        <!-- <button onclick="handleClick()" disabled class="btn waves-effect waves-light green"> -->
-                        <button class="btn waves-effect waves-light green"> Export CSV <i
-                                class="material-icons right">cloud_download</i>
-                        </button>
-                    </a>
                 </div>
             </div>
         </div>
@@ -310,19 +297,19 @@ function download()
                 // Add your custom logic here
             }
         </script>
-    </body>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+</body>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
-    <?php
-    require_once "helpers/footer.php";
-    ?>
+<?php
+require_once "helpers/footer.php";
+?>

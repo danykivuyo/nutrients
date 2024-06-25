@@ -125,7 +125,7 @@ class Home extends Controller
                 $plant_data = null;
             }
             $data = [
-                "title" => "bio-gas",
+                "title" => "nutrients",
                 "user_details" => $user_details,
                 "plant_details" => ['one', 'two'],
                 "plant_data" => $plant_data,
@@ -141,7 +141,7 @@ class Home extends Controller
     {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // $payload = @file_get_contents('php://input');
+            $payload = @file_get_contents('php://input');
             $object = json_decode($payload, TRUE);
             header('Content-Type: application/json');
             echo $payload;
