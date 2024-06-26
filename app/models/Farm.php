@@ -13,13 +13,14 @@ class Farm
 
     //raw data
     private $plant_id;
-    private $carbon_dioxide;
-    private $methane;
-    private $temperature;
-    private $humidity;
-    private $ammonia;
-    private $nitrogen_oxide;
-    private $carbon_monoxide;
+    private $nitrogen;
+    private $phosphorus;
+    private $pottasium;
+    private $soil_ph;
+    private $soil_temperature;
+    private $soil_humidity;
+    private $electrical_conductivity;
+    private $salinity;
 
     public function __construct()
     {
@@ -190,36 +191,39 @@ class Farm
         //raw data
         $this->farm_id = $farm_id;
         $this->plant_id = $raw_data["plant_id"];
-        $this->carbon_dioxide = $raw_data["carbon_dioxide"];
-        $this->methane = $raw_data["methane"];
-        $this->temperature = $raw_data["temperature"];
-        $this->humidity = $raw_data["humidity"];
-        $this->ammonia = $raw_data["ammonia"];
-        $this->nitrogen_oxide = $raw_data["nitrogen_oxide"];
-        $this->carbon_monoxide = $raw_data["carbon_monoxide"];
+        $this->nitrogen = $raw_data["nitrogen"];
+        $this->phosphorus = $raw_data["phosphorus"];
+        $this->pottasium = $raw_data["pottasium"];
+        $this->soil_ph = $raw_data["soil_ph"];
+        $this->soil_temperature = $raw_data["soil_temperature"];
+        $this->soil_humidity = $raw_data["soil_humidity"];
+        $this->electrical_conductivity = $raw_data["electrical_conductivity"];
+        $this->salinity = $raw_data["salinity"];
         $this->time_stamp = $raw_data["time_stamp"];
 
         $this->db->query(
             "INSERT INTO `" . $farm_name . "` (
                     `farm_id`,
                     `plant_id`, 
-                    `carbon_dioxide`,
-                    `methane`,
-                    `temperature`, 
-                    `humidity`,
-                    `ammonia`,
-                    `nitrogen_oxide`,
-                    `carbon_monoxide`,
+                    `nitrogen`,
+                    `phosphorus`,
+                    `pottasium`, 
+                    `soil_ph`,
+                    `soil_temperature`,
+                    `soil_humidity`,
+                    `electrical_conductivity`,
+                    `salinity`,
                     `time_stamp` ) VALUES
                     ('$this->farm_id',
                     '$this->plant_id', 
-                    '$this->carbon_dioxide',
-                    '$this->methane',
-                    '$this->temperature',
-                    '$this->humidity',
-                    '$this->ammonia',
-                    '$this->nitrogen_oxide',
-                    '$this->carbon_monoxide',
+                    '$this->nitrogen',
+                    '$this->phosphorus',
+                    '$this->pottasium',
+                    '$this->soil_ph',
+                    '$this->soil_temperature',
+                    '$this->soil_humidity',
+                    '$this->electrical_conductivity',
+                    '$this->salinity',
                     '$this->time_stamp'
                     )"
         );

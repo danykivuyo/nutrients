@@ -137,14 +137,49 @@ class Home extends Controller
 
     }
 
-    public function plantnode($plant_id = null, $api_key = null, $mode = "test", $nitrohen = null, $phosphorus = null, $pottasium = null, $soil_ph = null, $soil_temperature = null, $soil_humidity = null, $electrical_conductivity = null, $salinity = null, $time_stamp = null)
+    public function plantnode($plant_id = null, $api_key = null, $mode = "test", $nitrogen = null, $phosphorus = null, $pottasium = null, $soil_ph = null, $soil_temperature = null, $soil_humidity = null, $electrical_conductivity = null, $salinity = null, $time_stamp = null)
     {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $payload = @file_get_contents('php://input');
             $object = json_decode($payload, TRUE);
             header('Content-Type: application/json');
-            echo $payload;
+            // if ($mode != "live") {
+            //     echo $payload;
+            //     return;
+            // }
+
+            $raw_data = [
+                "plant_id" => $object['plant_id'],
+                "nitrogen" => $object['nitrogen'],
+                "phosphorus" => $object['phosphorus'],
+                "pottasium" => $object['pottasium'],
+                "soil_ph" => $object['soil_ph'],
+                "soil_temperature" => $object['soil_temperature'],
+                "soil_humidity" => $object['soil_humidity'],
+                "electrical_conductivity" => $object['electrical_conductivity'],
+                "salinity" => $object['salinity'],
+                "time_stamp" => $object['time_stamp']
+            ];
+
+            $farm_name = $this->plantModel->getFarmName($raw_data["plant_id"]);
+            $farm_data = $this->farmModel->getFarm($farm_name);
+            $data["raw_data"] = $raw_data;
+            $data["farm_data"] = $farm_data;
+            if (!isset($data["farm_data"]["farm_name"])) {
+                echo json_encode(
+                    [
+                        "success" => false,
+                        "message" => "Device Not Registered",
+                    ]
+                );
+                return;
+            }
+            if ($mode != "live") {
+                echo json_encode($data);
+                return;
+            }
+            $this->farmModel->putFarmNode($data["farm_data"]["farm_name"], $data["farm_data"]["farm_id"], $data["raw_data"]);
             return;
         } else {
             header('Content-Type: application/json');
@@ -153,7 +188,7 @@ class Home extends Controller
 
                 $raw_data = [
                     "plant_id" => $plant_id,
-                    "nitrohen" => $nitrohen,
+                    "nitrogen" => $nitrogen,
                     "phosphorus" => $phosphorus,
                     "pottasium" => $pottasium,
                     "soil_ph" => $soil_ph,
@@ -163,6 +198,7 @@ class Home extends Controller
                     "salinity" => $salinity,
                     "time_stamp" => $time_stamp
                 ];
+
                 $farm_name = $this->plantModel->getFarmName($raw_data["plant_id"]);
                 $farm_data = $this->farmModel->getFarm($farm_name);
                 $data["raw_data"] = $raw_data;
@@ -176,11 +212,13 @@ class Home extends Controller
                     );
                     return;
                 }
-                echo json_encode($data);
-                return;
+                if ($mode != "live") {
+                    echo json_encode($data);
+                    return;
+                }
                 // $this->view("plantnode/index", $data);
-                // $this->farmModel->putFarmNode($data["farm_data"]["farm_name"], $data["farm_data"]["farm_id"], $data["raw_data"]);
-                // return;
+                $this->farmModel->putFarmNode($data["farm_data"]["farm_name"], $data["farm_data"]["farm_id"], $data["raw_data"]);
+                return;
             }
             echo json_encode(
                 [
